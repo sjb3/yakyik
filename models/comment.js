@@ -2,10 +2,10 @@
 
 const mongoose = require('mongoose');
 
-const ZoneSchema = new mongoose.Schema({
-  name: {type: String, default''},
-  location: {type: [Number]},
-  timestamp: {}
+const CommentSchema = new mongoose.Schema({
+  username: {type: String, default:''},
+  body: {type: String, default:''},
+  timestamp: {type: Date, default: Date.now}
 });
 
-module.exports = mongoose.model('ZoneSchema', ZoneSchema);
+module.exports = mongoose.model('CommentSchema', CommentSchema);
