@@ -7,20 +7,28 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
+var dbUrl = 'mongodb://localhost/yak-yik';
 
-// var routes = require('./routes/index');
+mongoose.connect(dbUrl, function(err, res){
+  if(err){
+    console.log('mongoose says: DB CONNECTION FAILED' + err);
+  }
+  return console.log('mongoose says: DB CONNECTION SUCCESS @ ' + dbUrl);
+})
+
+
+var routes = require('./routes/index');
 var api = require('./routes/api');
+
+var app = express();
 
 // Here we find an appropriate database to connect to, defaulting to localhost if we don't find one.
 var uristring = 'mongodb://localhost/ReactProject';
 mongoose.connect(uristring, function(err, res){
-  if (err){ // connection failed
-    console.log('DB Connection Failed')
-  }
-  else {
-    console.log('DB Connection Success: '+uristring)
-  }
+  if (err) return console.log('app.js says: DB Connection Failed')
 
+    return console.err('app.js says: DB Connection Success: '+uristring)
 })
 
 var app = express();
@@ -37,8 +45,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use('/', routes);
-// app.use('/api', api);
+app.use('/', routes);
+app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -70,6 +78,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;
