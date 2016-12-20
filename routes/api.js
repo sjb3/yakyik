@@ -1,34 +1,97 @@
 'use strict';
 
-const express = require('express');
-const debug = require('debug')('yakyik: api-route');
-const bodyParser = require('body-parser').json();
-const router = express.Router();
-const zoneController = require('../controllers/zone-controller');
-const controllers = require('../controllers');
-// const zoneRouter = module.exports = new router;
+var express = require('express');
+var router = express.Router();
+var zoneController = require('../controllers/zone-controller');
+var controllers = require('../controllers');
 
-router.get('/:resource/:id', function(req, res, next){
-  debug('get /zone/:id');
+router.get('/:resource', function(req,res,next){
 
-  var resource = req.params.resource;
-  var id = req.params.id;
+	var resource = req.params.resource;
+	var controller = controllers[resource]
 
-  if(resource =='zone'){
-    zoneController.fetchZoneById(id, function(err, results){
-      if(err){
-        res.json({
-          confirmation: 'failed',
-          message : 'Not Found'
-        })
-      }
-      return res.json ({ confirmation: 'success', results: results })
-    });
-  };
+	if(controller == null){
+		res.json({
+			confirmation: 'fail',
+			message: 'Invalid Resource Request: ' + resource
+		})
+		return
+	}
+
+	controller.find(req.query, function(err, results){
+		if(err){
+			res.json({
+				confirmation: 'fail',
+				message: err
+			})
+			return
+		}
+
+		res.json({
+			confirmation: 'success',
+			results: results
+		})
+	})
+
 });
 
-  // zoneController.fetchZoneById(id)
-  // .then(zone => res.json(zone))
-  // .catch(next);
-// });
+router.get('/:resource/:id', function(req,res,next){
+
+	var resource = req.params.resource;
+	var id = req.params.id;
+	var controller = controllers[resource]
+
+	if(controller == null){
+		res.json({
+			confirmation: 'fail',
+			message: 'Invalid Resource Request: ' + resource
+		})
+		return
+	}
+
+	controller.findById(id, function(err, result){
+		if(err){
+			res.json({
+				confirmation: 'fail',
+				message: 'Not Found'
+			})
+			return
+		}
+		res.json({
+			confirmation: 'success',
+			result: result
+		})
+	})
+
+});
+
+router.post('/:resource', function(req,res,next){
+
+	var resource = req.params.resource
+	var controller = controllers[resource]
+
+	if(controller == null){
+		res.json({
+			confirmation: 'fail',
+			message: 'Invalid Resource Request: ' + resource
+		})
+		return
+	}
+
+	controller.create(req.body, function(err, result){
+		if(err){
+			res.json({
+				confirmation: 'fail',
+				message: err
+			})
+			return
+		}
+		res.json({
+			confirmation: 'success',
+			result: result
+		})
+	})
+
+});
+
 module.exports = router;

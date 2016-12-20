@@ -1,53 +1,64 @@
 'use strict';
 
-const debug = require('debug')('yakyik: zone-controller');
-const Zone = require('../models/zone');
-const httpErrors = require('http-errors');
+var Zone = require('../models/zone');
 
-debug('zone-controller');
+module.exports = {
+	find: function(params, callback){
+		Zone.find(params, function(err, zones){
+			if(err){
+				callback(err, null)
+				return
+			}
+			callback(null, zones)
+		})
+	},
+	findById: function(id, callback){
+		Zone.findById(id, function(err, zone){
+			if(err){
+				callback(err,null)
+				return
+			}
+			callback(null,zone)
+		})
 
-exports.createZone = function(zoneData){
-  debug('createZone');
-  return new Promise((resolve, reject) => {
-    new Zone(zoneData).save()
-    .then( zone => resolve(zone))
-    .catch( err => reject(httpErrors(400, err.message)))
-  });
-};
+	},
+	create: function(params, callback){
+		var zips = params['zipCodes']
+		console.log(zips)
+		var zip = zips.split(',')
+		console.log(zip)
+		var newZips = []
+		zip.forEach(function(zipCode){
+			newZips.push(zipCode.trim())
+		})
 
-exports.removeAllZones = function(){
-  debug('removeAllZones');
+		params['zipCodes'] = newZips
 
-  return Zone.remove({});
-};
+		Zone.create(params, function(err, zone){
+			if(err){
+				callback(err,null)
+				return
+			}
+			callback(null,zone)
+		})
 
-exports.fetchZoneById = function(zoneId){
-  debug('fetchZoneById');
-
-  return new Promise((resolve, reject) => {
-    Zone.findOne({_id: zoneId})
-    .then( zone => resolve(zone))
-    .catch( err => reject(httpErrors(400, err.message)));
-  });
-};
-
-exports.deleteZone = function(zoneId){
-  debug('deleteZone');
-
-  return new Promise((resolve, reject) => {
-    Zone.findByIdAndRemove({ _id: zoneId })
-    .then( zone => resolve(zone))
-    .catch( err => reject(httpErrors(400, err.message)));
-  });
-};
-
-exports.updateZone = function(zoneId, reqBody){
-  debug('updateZone');
-
-  return new Promise((resolve, reject) => {
-    Zone.findByIdAndUpdate(zoneId, reqBody)
-    .then(() => Zone.findOne({_id: zoneId}))
-    .then( zone => resolve(zone))
-    .catch( err => reject(httpErrors(400, err.message)));
-  });
-};
+	},
+	update: function(id, params, callback){
+		Zone.findByIdAndUpdate(id, params, {new:true}, function(err, zone){
+			if(err){
+				callback(err,null)
+				return
+			}
+			callback(null,zone)
+		})
+	},
+	destroy: function(id, callback){
+		Zone.findByIdAndRemove(id, function(err){
+			if(err){
+				callback(err,null)
+				return
+			}
+			callback(null,null)
+		})
+	}
+}
