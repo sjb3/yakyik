@@ -5,7 +5,7 @@ var path = require('path');
 
 module.exports = {
 	entry: {
-		app: './src/app.js'
+		app: './src/app.js'//where the react code is
 	},
 	output: {
 		filename: 'public/build/bundle.js',
