@@ -20,13 +20,15 @@
     "react-dom": "^15.4.1",
     "serve-favicon": "^2.3.2",
     "superagent": "^3.3.0",
-    "webpack": "^1.14.0"
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2"
   },
   "devDependencies": {
     "eslint": "^3.12.2",
     "http-errors": "^1.5.1"
   },
   "scripts": {
+    "watch": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
