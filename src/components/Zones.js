@@ -1,6 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
+import Zone from './Zone';
 
 class Zones extends Component {
   render(){
@@ -8,29 +9,12 @@ class Zones extends Component {
       <div>
         <ul>
           <div>
-            <li><a href="#">Zone 1</a></li>
-            <span>10012</span><br />
-            <span>10 comments</span>
+            <li>< Zone name="Zone1" zipCode="98101" numComment={2} /></li>
+            <li>< Zone name="Zone2" zipCode="98102" numComment={2}/></li>
+            <li>< Zone name="Zone3" zipCode="98103" numComment={22}/></li>
+            <li>< Zone name="Zone4" zipCode="98106" numComment={21}/></li>
           </div>
-
-          <div>
-            <li><a href="#">Zone 2</a></li>
-            <span>10012</span><br />
-            <span>10 comments</span>
-          </div>
-
-          <div>
-            <li><a href="#">Zone 3</a></li>
-            <span>10012</span><br />
-            <span>10 comments</span>
-          </div>
-
-          <div>
-            <li><a href="#">Zone 4</a></li>
-            <span>10012</span><br />
-            <span>10 comments</span>
-          </div>
-        </ul>
+          </ul>
       </div>
     )
   }
