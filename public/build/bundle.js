@@ -60,6 +60,10 @@
 	
 	var _Zones2 = _interopRequireDefault(_Zones);
 	
+	var _Home = __webpack_require__(181);
+	
+	var _Home2 = _interopRequireDefault(_Home);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -88,7 +92,7 @@
 	          null,
 	          'Hello React!'
 	        ),
-	        _react2.default.createElement(_Zones2.default, null)
+	        _react2.default.createElement(_Home2.default, null)
 	      );
 	    }
 	  }]);
@@ -21521,6 +21525,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _Zone = __webpack_require__(179);
+	
+	var _Zone2 = _interopRequireDefault(_Zone);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21535,114 +21543,32 @@
 	  function Zones() {
 	    _classCallCheck(this, Zones);
 	
-	    return _possibleConstructorReturn(this, (Zones.__proto__ || Object.getPrototypeOf(Zones)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (Zones.__proto__ || Object.getPrototypeOf(Zones)).call(this));
+	
+	    _this.state = {
+	      list: [{ name: 'Zone 1', zipCode: '10012', numComments: 10 }, { name: 'Zone 2', zipCode: '12412', numComments: 120 }, { name: 'Zone 3', zipCode: '10012', numComments: 103 }, { name: 'Zone 4', zipCode: '92122', numComments: 210 }]
+	    };
+	    return _this;
 	  }
 	
 	  _createClass(Zones, [{
 	    key: 'render',
 	    value: function render() {
+	      var listItems = this.state.list.map(function (zone, i) {
+	        return _react2.default.createElement(
+	          'li',
+	          null,
+	          _react2.default.createElement(_Zone2.default, { currentzone: zone })
+	        );
+	      });
+	
 	      return _react2.default.createElement(
 	        'div',
 	        null,
 	        _react2.default.createElement(
 	          'ul',
 	          null,
-	          _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	              'li',
-	              null,
-	              _react2.default.createElement(
-	                'a',
-	                { href: '#' },
-	                'Zone 1'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'span',
-	              null,
-	              '10012'
-	            ),
-	            _react2.default.createElement('br', null),
-	            _react2.default.createElement(
-	              'span',
-	              null,
-	              '10 comments'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	              'li',
-	              null,
-	              _react2.default.createElement(
-	                'a',
-	                { href: '#' },
-	                'Zone 2'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'span',
-	              null,
-	              '10012'
-	            ),
-	            _react2.default.createElement('br', null),
-	            _react2.default.createElement(
-	              'span',
-	              null,
-	              '10 comments'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	              'li',
-	              null,
-	              _react2.default.createElement(
-	                'a',
-	                { href: '#' },
-	                'Zone 3'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'span',
-	              null,
-	              '10012'
-	            ),
-	            _react2.default.createElement('br', null),
-	            _react2.default.createElement(
-	              'span',
-	              null,
-	              '10 comments'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	              'li',
-	              null,
-	              _react2.default.createElement(
-	                'a',
-	                { href: '#' },
-	                'Zone 4'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'span',
-	              null,
-	              '10012'
-	            ),
-	            _react2.default.createElement('br', null),
-	            _react2.default.createElement(
-	              'span',
-	              null,
-	              '10 comments'
-	            )
-	          )
+	          listItems
 	        )
 	      );
 	    }
@@ -21654,6 +21580,324 @@
 	;
 	
 	exports.default = Zones;
+
+/***/ },
+/* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _styles = __webpack_require__(180);
+	
+	var _styles2 = _interopRequireDefault(_styles);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Zone = function (_Component) {
+	  _inherits(Zone, _Component);
+	
+	  function Zone() {
+	    _classCallCheck(this, Zone);
+	
+	    return _possibleConstructorReturn(this, (Zone.__proto__ || Object.getPrototypeOf(Zone)).apply(this, arguments));
+	  }
+	
+	  _createClass(Zone, [{
+	    key: 'render',
+	    value: function render() {
+	      var zoneStyle = _styles2.default.zone;
+	
+	      return _react2.default.createElement(
+	        'div',
+	        { style: zoneStyle.container },
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          _react2.default.createElement(
+	            'a',
+	            { style: zoneStyle.title, href: '#' },
+	            this.props.currentzone.name
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'detail' },
+	          'zip: ',
+	          this.props.currentzone.zipCode
+	        ),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'detail' },
+	          this.props.currentzone.numComments,
+	          ' comments'
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Zone;
+	}(_react.Component);
+	
+	exports.default = Zone;
+
+/***/ },
+/* 180 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = {
+	  universal: {},
+	  zone: {
+	    container: {
+	      background: 'yellow',
+	      padding: 16,
+	      marginTop: 2,
+	      border: '1px solid black'
+	    },
+	    header: {
+	      marginTop: 0,
+	      marginBottom: 0
+	    },
+	    title: {
+	      textDecoration: 'none',
+	      color: 'red'
+	    }
+	  },
+	  comment: {
+	    commentsBox: {
+	      padding: 12,
+	      background: 'green',
+	      border: '3px solid pink'
+	    }
+	  }
+	};
+
+/***/ },
+/* 181 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Zones = __webpack_require__(178);
+	
+	var _Zones2 = _interopRequireDefault(_Zones);
+	
+	var _Comments = __webpack_require__(182);
+	
+	var _Comments2 = _interopRequireDefault(_Comments);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Home = function (_Component) {
+	  _inherits(Home, _Component);
+	
+	  function Home() {
+	    _classCallCheck(this, Home);
+	
+	    return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
+	  }
+	
+	  _createClass(Home, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'container' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-md-4' },
+	            _react2.default.createElement(_Zones2.default, null)
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-md-8' },
+	            _react2.default.createElement(_Comments2.default, null)
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Home;
+	}(_react.Component);
+	
+	exports.default = Home;
+
+/***/ },
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Comment = __webpack_require__(183);
+	
+	var _Comment2 = _interopRequireDefault(_Comment);
+	
+	var _styles = __webpack_require__(180);
+	
+	var _styles2 = _interopRequireDefault(_styles);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Comments = function (_Component) {
+	  _inherits(Comments, _Component);
+	
+	  function Comments() {
+	    _classCallCheck(this, Comments);
+	
+	    var _this = _possibleConstructorReturn(this, (Comments.__proto__ || Object.getPrototypeOf(Comments)).call(this));
+	
+	    _this.state = {
+	      list: [{ body: 'comment 1', username: 'dump', timestamp: '1:20' }, { body: 'comment 2', username: '2dump', timestamp: '1:20' }, { body: 'comment 3', username: '3dump', timestamp: '1:20' }]
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(Comments, [{
+	    key: 'render',
+	    value: function render() {
+	      var commentList = this.state.list.map(function (comment, i) {
+	        return _react2.default.createElement(
+	          'li',
+	          null,
+	          _react2.default.createElement(_Comment2.default, { currentComment: comment })
+	        );
+	      });
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Zone 1 Comments'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { style: _styles2.default.comment.commentsBox },
+	          _react2.default.createElement(
+	            'ol',
+	            { style: { listStyleType: 'none' } },
+	            commentList
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Comments;
+	}(_react.Component);
+	
+	exports.default = Comments;
+
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Comment = function (_Component) {
+	  _inherits(Comment, _Component);
+	
+	  function Comment() {
+	    _classCallCheck(this, Comment);
+	
+	    return _possibleConstructorReturn(this, (Comment.__proto__ || Object.getPrototypeOf(Comment)).apply(this, arguments));
+	  }
+	
+	  _createClass(Comment, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        this.props.currentComment.body,
+	        ':',
+	        _react2.default.createElement('br', null),
+	        this.props.currentComment.username,
+	        _react2.default.createElement('br', null),
+	        this.props.currentComment.timestamp
+	      );
+	    }
+	  }]);
+	
+	  return Comment;
+	}(_react.Component);
+	
+	exports.default = Comment;
 
 /***/ }
 /******/ ]);
