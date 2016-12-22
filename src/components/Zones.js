@@ -17,7 +17,7 @@ class Zones extends Component {
   }
 
   render(){
-    const listItems = this.state.list.map( (zone, i) => {
+    const listItems = this.state.list.map((zone, i) => {
       return (
         <li><Zone currentzone={zone} /></li>
       )

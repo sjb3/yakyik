@@ -19,5 +19,12 @@ export default {
       textDecoration:'none',
       color: 'red'
     }
+  },
+  comment: {
+      commentsBox: {
+        padding: 12,
+        background: 'green',
+        border: '3px solid pink'
+      }
   }
 }

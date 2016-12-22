@@ -6,7 +6,10 @@ class Comment extends Component{
   render(){
     return (
       <div>
-        Whatever!
+        {this.props.currentComment.body}:<br />
+        {this.props.currentComment.username}<br />
+        {this.props.currentComment.timestamp}
+
       </div>
     )
   }
