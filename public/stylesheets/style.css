@@ -6,3 +6,9 @@ body {
 a {
   color: pink;
 }
+
+.detail {
+  font: 12px;
+  font-style: italic;
+  color: #777;
+}
