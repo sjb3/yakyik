@@ -1,0 +1,10 @@
+Google fonts collection
+
+font-family: 'Shrikhand', cursive;
+<link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
+
+font-family: 'Open Sans Condensed', sans-serif;
+<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+
+font-family: 'Shadows Into Light', cursive;
+<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Shadows+Into+Light" rel="stylesheet">

@@ -25,6 +25,9 @@ export default {
         padding: 12,
         background: 'green',
         border: '3px solid pink'
+      },
+      commentsList: {
+        listStyleType: 'none'
       }
   }
 }
