@@ -4,17 +4,30 @@ import React, { Component } from 'react';
 import Zone from './Zone';
 
 class Zones extends Component {
+  constructor(){
+    super()
+    this.state = {
+      list: [
+        {name: 'Zone 1', zipCode: '10012', numComments: 10},
+        {name: 'Zone 2', zipCode: '12412', numComments: 120},
+        {name: 'Zone 3', zipCode: '10012', numComments: 103},
+        {name: 'Zone 4', zipCode: '92122', numComments: 210}
+      ]
+    }
+  }
+
   render(){
+    const listItems = this.state.list.map( (zone, i) => {
+      return (
+        <li><Zone currentzone={zone} /></li>
+      )
+    });
+
     return(
       <div>
         <ul>
-          <div>
-            <li>< Zone name="Zone1" zipCode="98101" numComment={2} /></li>
-            <li>< Zone name="Zone2" zipCode="98102" numComment={2}/></li>
-            <li>< Zone name="Zone3" zipCode="98103" numComment={22}/></li>
-            <li>< Zone name="Zone4" zipCode="98106" numComment={21}/></li>
-          </div>
-          </ul>
+          {listItems}
+        </ul>
       </div>
     )
   }

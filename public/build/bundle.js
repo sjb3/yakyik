@@ -21539,42 +21539,32 @@
 	  function Zones() {
 	    _classCallCheck(this, Zones);
 	
-	    return _possibleConstructorReturn(this, (Zones.__proto__ || Object.getPrototypeOf(Zones)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (Zones.__proto__ || Object.getPrototypeOf(Zones)).call(this));
+	
+	    _this.state = {
+	      list: [{ name: 'Zone 1', zipCode: '10012', numComments: 10 }, { name: 'Zone 2', zipCode: '12412', numComments: 120 }, { name: 'Zone 3', zipCode: '10012', numComments: 103 }, { name: 'Zone 4', zipCode: '92122', numComments: 210 }]
+	    };
+	    return _this;
 	  }
 	
 	  _createClass(Zones, [{
 	    key: 'render',
 	    value: function render() {
+	      var listItems = this.state.list.map(function (zone, i) {
+	        return _react2.default.createElement(
+	          'li',
+	          null,
+	          _react2.default.createElement(_Zone2.default, { currentzone: zone })
+	        );
+	      });
+	
 	      return _react2.default.createElement(
 	        'div',
 	        null,
 	        _react2.default.createElement(
 	          'ul',
 	          null,
-	          _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	              'li',
-	              null,
-	              _react2.default.createElement(_Zone2.default, { name: 'Zone1', zipCode: '98101', numComment: 2 })
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              null,
-	              _react2.default.createElement(_Zone2.default, { name: 'Zone2', zipCode: '98102', numComment: 2 })
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              null,
-	              _react2.default.createElement(_Zone2.default, { name: 'Zone3', zipCode: '98103', numComment: 22 })
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              null,
-	              _react2.default.createElement(_Zone2.default, { name: 'Zone4', zipCode: '98106', numComment: 21 })
-	            )
-	          )
+	          listItems
 	        )
 	      );
 	    }
@@ -21603,6 +21593,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _styles = __webpack_require__(180);
+	
+	var _styles2 = _interopRequireDefault(_styles);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21623,28 +21617,31 @@
 	  _createClass(Zone, [{
 	    key: 'render',
 	    value: function render() {
+	      var zoneStyle = _styles2.default.zone;
+	
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { style: zoneStyle.container },
 	        _react2.default.createElement(
 	          'h2',
 	          null,
 	          _react2.default.createElement(
 	            'a',
-	            { href: '#' },
-	            this.props.name
+	            { style: zoneStyle.title, href: '#' },
+	            this.props.currentzone.name
 	          )
 	        ),
 	        _react2.default.createElement(
 	          'span',
 	          null,
-	          this.props.zipCode
+	          'zip: ',
+	          this.props.currentzone.zipCode
 	        ),
 	        _react2.default.createElement('br', null),
 	        _react2.default.createElement(
 	          'span',
 	          null,
-	          this.props.numComment,
+	          this.props.currentzone.numComments,
 	          ' comments'
 	        )
 	      );
@@ -21655,6 +21652,35 @@
 	}(_react.Component);
 	
 	exports.default = Zone;
+
+/***/ },
+/* 180 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = {
+	  universal: {},
+	  zone: {
+	    container: {
+	      background: 'yellow',
+	      padding: 16,
+	      marginTop: 2,
+	      border: '1px solid black'
+	    },
+	    header: {
+	      marginTop: 0,
+	      marginBottom: 0
+	    },
+	    title: {
+	      textDecoration: 'none',
+	      color: 'red'
+	    }
+	  }
+	};
 
 /***/ }
 /******/ ]);
