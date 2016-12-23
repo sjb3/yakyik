@@ -2,8 +2,7 @@
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Zones from './components/Zones';
-import Home from './components/Home';
+import Home from './components/layout/Home';
 
 class App extends Component {
   render(){

@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import Comment from './Comment';
+import Comment from '../presentation/Comment';
 import styles from './styles';
 
 class Comments extends Component {
@@ -29,6 +29,7 @@ class Comments extends Component {
             <ol style={styles.comment.commentsList}>
               { commentList }
             </ol>
+            <input type="text" placeholder="UserName"/>
           </div>
       </div>
     )
