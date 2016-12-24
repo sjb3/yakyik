@@ -21709,7 +21709,7 @@
 	    key: 'render',
 	    value: function render() {
 	      var listItems = this.state.list.map(function (zone, i) {
-	        return _react2.default.createElement('li', null, _react2.default.createElement(_Zone2.default, { currentzone: zone }));
+	        return _react2.default.createElement('li', { key: i }, _react2.default.createElement(_Zone2.default, { currentzone: zone }));
 	      });
 	
 	      return _react2.default.createElement('div', null, _react2.default.createElement('ul', null, listItems));
@@ -21908,12 +21908,25 @@
 	  }
 	
 	  _createClass(Comments, [{
+	    key: 'submitComment',
+	    value: function submitComment() {}
+	  }, {
+	    key: 'updateUsername',
+	    value: function updateUsername(event) {
+	      console.log('updateUsername: ', event.target.value);
+	    }
+	  }, {
+	    key: 'updateComments',
+	    value: function updateComments(event) {
+	      console.log('updateComments: ', event.target.value);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var commentList = this.state.list.map(function (comment, i) {
-	        return _react2.default.createElement('li', null, _react2.default.createElement(_Comment2.default, { currentComment: comment }));
+	        return _react2.default.createElement('li', { key: i }, _react2.default.createElement(_Comment2.default, { currentComment: comment }));
 	      });
-	      return _react2.default.createElement('div', null, _react2.default.createElement('h2', null, 'Zone 1 Comments'), _react2.default.createElement('div', { style: _styles2.default.comment.commentsBox }, _react2.default.createElement('ol', { style: _styles2.default.comment.commentsList }, commentList), _react2.default.createElement('input', { type: 'text', placeholder: 'UserName' })));
+	      return _react2.default.createElement('div', null, _react2.default.createElement('h2', null, 'Zone 1 Comments'), _react2.default.createElement('div', { style: _styles2.default.comment.commentsBox }, _react2.default.createElement('ol', { style: _styles2.default.comment.commentsList }, commentList), _react2.default.createElement('input', { onChange: this.updateUsername.bind(this), className: 'form-control', type: 'text', placeholder: 'UserName' }), _react2.default.createElement('br', null), _react2.default.createElement('input', { onChange: this.updateComments.bind(this), className: 'form-control', type: 'text', placeholder: 'Comments' }), _react2.default.createElement('br', null), _react2.default.createElement('button', { onClick: this.submitComment.bind(this), className: 'btn btn-info' }, 'Submit comment')));
 	    }
 	  }]);
 	
