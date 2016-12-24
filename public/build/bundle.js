@@ -21902,6 +21902,10 @@
 	    var _this = _possibleConstructorReturn(this, (Comments.__proto__ || Object.getPrototypeOf(Comments)).call(this));
 	
 	    _this.state = {
+	      comments: {
+	        username: '',
+	        body: ''
+	      },
 	      list: [{ body: 'comment 1', username: 'dump', timestamp: '1:20' }, { body: 'comment 2', username: '2dump', timestamp: '1:20' }, { body: 'comment 3', username: '3dump', timestamp: '1:20' }]
 	    };
 	    return _this;
@@ -21909,16 +21913,29 @@
 	
 	  _createClass(Comments, [{
 	    key: 'submitComment',
-	    value: function submitComment() {}
+	    value: function submitComment() {
+	      console.log('submitComment: ' + JSON.stringify(this.state.comment));
+	    }
 	  }, {
 	    key: 'updateUsername',
 	    value: function updateUsername(event) {
-	      console.log('updateUsername: ', event.target.value);
+	      console.log('updateUsername: ' + event.target.value);
+	      // this.state.comment['username'] = event.target.value WRONG WAY
+	      var updatedComment = Object.assign({}, this.state.comment);
+	      updatedComment['username'] = event.target.value;
+	      this.setState({
+	        comment: updatedComment
+	      });
 	    }
 	  }, {
 	    key: 'updateComments',
 	    value: function updateComments(event) {
-	      console.log('updateComments: ', event.target.value);
+	      console.log('updateComments: ' + event.target.value);
+	      var updatedComment = Object.assign({}, this.state.comment);
+	      updatedComment['body'] = event.target.value;
+	      this.setState({
+	        comment: updatedComment
+	      });
 	    }
 	  }, {
 	    key: 'render',
