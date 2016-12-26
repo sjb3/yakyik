@@ -28,6 +28,9 @@ class Zones extends Component {
         <ul>
           {listItems}
         </ul>
+        <input className="form-control" type="text" placeholder="Name"/><br />
+        <input className="form-control" type="text" placeholder="Zip Code"/><br />
+        <button className="btn btn-danger" type="submit">Add Zone</button>
       </div>
     )
   }
