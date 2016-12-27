@@ -17,6 +17,27 @@ class Zones extends Component {
     }
   }
 
+  ComponentDidMount(){
+    console.log('ComponentDidMount:');
+
+    superagent
+    .get('/api/zone')
+    .query(null)
+    .set('Accept', 'application/json')
+    .end((err, response) => {
+      if(err){
+        alert('ERROR' + err)
+        return
+      }
+      console.log(JSON.stringify(response.body));
+
+      let results = response.body.results
+      this.setState({
+        list: results
+      })
+    })
+  }
+
   updateZone(event){
     console.log('updateZone: '+event.target.id+ ' == ' +event.target.value);
 

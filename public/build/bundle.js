@@ -21715,6 +21715,26 @@
 	  }
 	
 	  _createClass(Zones, [{
+	    key: 'ComponentDidMount',
+	    value: function ComponentDidMount() {
+	      var _this2 = this;
+	
+	      console.log('ComponentDidMount:');
+	
+	      _superagent2.default.get('/api/zone').query(null).set('Accept', 'application/json').end(function (err, response) {
+	        if (err) {
+	          alert('ERROR' + err);
+	          return;
+	        }
+	        console.log(JSON.stringify(response.body));
+	
+	        var results = response.body.results;
+	        _this2.setState({
+	          list: results
+	        });
+	      });
+	    }
+	  }, {
 	    key: 'updateZone',
 	    value: function updateZone(event) {
 	      console.log('updateZone: ' + event.target.id + ' == ' + event.target.value);
@@ -21819,8 +21839,8 @@
 	    key: 'render',
 	    value: function render() {
 	      var zoneStyle = _styles2.default.zone;
-	
-	      return _react2.default.createElement('div', { style: zoneStyle.container }, _react2.default.createElement('h2', null, _react2.default.createElement('a', { style: zoneStyle.title, href: '#' }, this.props.currentzone.name)), _react2.default.createElement('span', { className: 'detail' }, 'zip: ', this.props.currentzone.zipCode), _react2.default.createElement('br', null), _react2.default.createElement('span', { className: 'detail' }, this.props.currentzone.numComments, ' comments'));
+	      var zipCode = this.props.currentzone.zipCodes[0];
+	      return _react2.default.createElement('div', { style: zoneStyle.container }, _react2.default.createElement('h2', null, _react2.default.createElement('a', { style: zoneStyle.title, href: '#' }, this.props.currentzone.name)), _react2.default.createElement('span', { className: 'detail' }, 'zip: ', zipCode), _react2.default.createElement('br', null), _react2.default.createElement('span', { className: 'detail' }, this.props.currentzone.numComments, ' comments'));
 	    }
 	  }]);
 	
@@ -21948,6 +21968,11 @@
 	  }
 	
 	  _createClass(Comments, [{
+	    key: 'ComponentDidMount',
+	    value: function ComponentDidMount() {
+	      console.log('ComponentDidMount:');
+	    }
+	  }, {
 	    key: 'submitComment',
 	    value: function submitComment() {
 	      console.log('submitComment: ' + JSON.stringify(this.state.comment));
