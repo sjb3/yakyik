@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react';
 import Entry from '../presentation/Entry';
-import superagent from 'superagent';
-//use axios for god sake
+// import superagent from 'superagent';
+import axios from 'axios';
 
 class Entries extends Component {
   constructor(){
@@ -22,22 +22,36 @@ class Entries extends Component {
   ComponentDidMount(){
     console.log('ComponentDidMount:');
 
-    superagent
+    axios
     .get('/api/entry')
-    .query(null)
-    .set('Accept', 'application/json')
-    .end((err, response) => {
-      if(err){
-        alert('ERROR' + err)
-        return
-      }
+    .then(function(response){
       console.log(JSON.stringify(response.body));
 
-      let results = response.body.results
-      this.setState({
+      let results = response.body.resultsthis.setState({
         list: results
       })
     })
+    .catch(function(err){
+      alert('ERROR' + err);
+      return;
+    });
+
+    // superagent
+    // .get('/api/entry')
+    // .query(null)
+    // .set('Accept', 'application/json')
+    // .end((err, response) => {
+    //   if(err){
+    //     alert('ERROR' + err)
+    //     return
+    //   }
+    //   console.log(JSON.stringify(response.body));
+    //
+    //   let results = response.body.results
+    //   this.setState({
+    //     list: results
+    //   })
+    // })
   }
 
   updateEntry(event){
