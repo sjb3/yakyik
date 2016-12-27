@@ -4,12 +4,17 @@
 
 ### To run it
 
-Backend) ```mongod --dbpath ./db and
+Backend)
 
-        node server.js```
+```
+mongod --dbpath ./db and
+node server.js`
+```
 
-Frontend) ```webpack -w, or
+Frontend)
 
-          npm run watch, or
-
-          npm start```
+```
+webpack -w, or
+npm run watch, or
+npm start
+```
