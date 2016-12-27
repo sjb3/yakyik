@@ -1,9 +1,9 @@
 'use strict';
 
-const zoneController = require('./zone-controller');
+const entryController = require('./entry-controller');
 const commentController = require('./comment-controller');
 
 module.exports = {
   comment: commentController,
-  zone: zoneController
+  entry: entryController,
 };
