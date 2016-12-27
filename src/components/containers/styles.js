@@ -4,7 +4,7 @@ export default {
   universal: {
 
   },
-  zone: {
+  entry: {
     container: {
       background: 'yellow',
       padding: 16,
