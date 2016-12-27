@@ -72,8 +72,10 @@ class Entries extends Component {
         <ul>
           {listItems}
         </ul>
-        <input id="name" onChange={this.updateEntry.bind(this)} className="form-control" type="text" placeholder="Name"/><br />
-        <input id="zipCode" onChange={this.updateEntry.bind(this)} className="form-control" type="text" placeholder="Zip Code"/><br />
+        <input id="title" onChange={this.updateEntry.bind(this)} className="form-control" type="text" placeholder="Title"/><br />
+        <input id="text" onChange={this.updateEntry.bind(this)} className="form-control" type="text" placeholder="Text"/><br />
+        <input id="type" onChange={this.updateEntry.bind(this)} className="form-control" type="text" placeholder="Type"/><br />
+
         <button onClick={this.addEntry.bind(this)} className="btn btn-danger" type="submit">Add Entry</button>
       </div>
     )
