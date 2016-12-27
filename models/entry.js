@@ -3,13 +3,13 @@
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 
-const zoneSchema = new mongoose.Schema({
+const entrySchema = new mongoose.Schema({
   name: {type: String, default: ''},
   zipCodes: {type: Array, default: []},
   timestamp: {type: Date, default: Date.now}
 });
 
-module.exports = mongoose.model('zoneSchema', zoneSchema);
+module.exports = mongoose.model('entrySchema', entrySchema);
 // const Zone = module.exports = mongoose.model('zone', zoneSchema);
 // some validation that the records have to be filled
 // Zone.schema.path('records').validate(function(value){

@@ -70,7 +70,7 @@ class Comments extends Component {
     })
     return (
       <div>
-        <h2>Zone 1 Comments</h2>
+        <h2>Entry 1 Comments</h2>
           <div style = {styles.comment.commentsBox}>
             <ol style={styles.comment.commentsList}>
               { commentList }

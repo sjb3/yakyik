@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import Zones from '../containers/Zones';
+import Entries from '../containers/Entries';
 import Comments from '../containers/Comments';
 
 class Home extends Component{
@@ -11,7 +11,7 @@ class Home extends Component{
       <div className="container">
         <div className="row">
           <div className="col-md-4">
-            <Zones />
+            <Entries />
           </div>
 
           <div className="col-md-8">

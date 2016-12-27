@@ -5,21 +5,21 @@ var path = require('path');
 
 module.exports = {
 	entry: {
-		app: './src/app.js'//where the react code is
+		app: './src/app.js',//where the react code is
 	},
 	output: {
 		filename: 'public/build/bundle.js',
-		sourceMapFilename: 'public/build/bundle.map'
+		sourceMapFilename: 'public/build/bundle.map',
 	},
 	devtool: '#source-map',
 	module: {
 		loaders: [
 			{
-          test: /\.js?/,
-          loader: "babel-loader",
-          exclude: "/node_modules",
-          query: {
-              presets: ["react", "es2015"]
+				test: /\.js?/,
+				loader: 'babel-loader',
+				exclude: '/node_modules',
+				query: {
+					presets: ["react", "es2015"],
           }
       },
       {

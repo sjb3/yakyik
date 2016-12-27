@@ -6,12 +6,12 @@
     <link rel="stylesheet" href="/stylesheets/style.css"  />
   </head>
   <body>
-    <h1>Create Zone</h1>
+    <h1>Create Entry</h1>
 
-    <form action="/api/zone" method="post">
+    <form action="/api/entry" method="post">
       <input type="text" name="name" placeholder="Name" /><br />
       <input type="text" name="zipCodes" placeholder="Zip Codes" />
-      <input type="submit" value="Create Zone" />
+      <input type="submit" value="Create Entry" />
 
     </form>
   </body>
