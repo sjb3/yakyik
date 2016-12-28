@@ -21669,6 +21669,10 @@
 	
 	var _Entry2 = _interopRequireDefault(_Entry);
 	
+	var _superagent = __webpack_require__(182);
+	
+	var _superagent2 = _interopRequireDefault(_superagent);
+	
 	var _axios = __webpack_require__(192);
 	
 	var _axios2 = _interopRequireDefault(_axios);
@@ -21694,8 +21698,6 @@
 	    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
 	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 	}
-	// import superagent from 'superagent';
-	
 	
 	var Entries = function (_Component) {
 	  _inherits(Entries, _Component);
@@ -21718,14 +21720,17 @@
 	  }
 	
 	  _createClass(Entries, [{
-	    key: 'ComponentDidMount',
-	    value: function ComponentDidMount() {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+	
 	      console.log('ComponentDidMount:');
 	
 	      _axios2.default.get('/api/entry').then(function (response) {
-	        console.log(JSON.stringify(response.body));
+	        console.log(response.data);
 	
-	        var results = response.body.resultsthis.setState({
+	        var results = response.data.results;
+	        _this2.setState({
 	          list: results
 	        });
 	      }).catch(function (err) {
@@ -23820,6 +23825,10 @@
 	
 	var _superagent2 = _interopRequireDefault(_superagent);
 	
+	var _axios = __webpack_require__(192);
+	
+	var _axios2 = _interopRequireDefault(_axios);
+	
 	function _interopRequireDefault(obj) {
 	  return obj && obj.__esModule ? obj : { default: obj };
 	}
@@ -23862,9 +23871,40 @@
 	  }
 	
 	  _createClass(Comments, [{
-	    key: 'ComponentDidMount',
-	    value: function ComponentDidMount() {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+	
 	      console.log('ComponentDidMount:');
+	
+	      _axios2.default.get('/api/comment').then(function (response) {
+	        console.log(response.data);
+	
+	        var results = response.data.results;
+	        _this2.setState({
+	          list: results
+	        });
+	      }).catch(function (err) {
+	        alert('ERROR' + err);
+	        return;
+	      });
+	
+	      // superagent
+	      // .get('/api/comment')
+	      // .query(null)
+	      // .set('Accept', 'application/json')
+	      // .end((err, response) => {
+	      //   if(err){
+	      //     alert('ERROR' + err)
+	      //     return
+	      //   }
+	      //   console.log(JSON.stringify(response.body));
+	      //
+	      //   let results = response.body.results
+	      //   this.setState({
+	      //     list: results
+	      //   })
+	      // })
 	    }
 	  }, {
 	    key: 'submitComment',

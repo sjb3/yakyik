@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import Entry from '../presentation/Entry';
-// import superagent from 'superagent';
+import superagent from 'superagent';
 import axios from 'axios';
 
 class Entries extends Component {
@@ -19,19 +19,20 @@ class Entries extends Component {
     }
   }
 
-  ComponentDidMount(){
+  componentDidMount(){
     console.log('ComponentDidMount:');
 
     axios
     .get('/api/entry')
-    .then(function(response){
-      console.log(JSON.stringify(response.body));
+    .then((response) => {
+      console.log(response.data);
 
-      let results = response.body.resultsthis.setState({
+      let results = response.data.results
+      this.setState({
         list: results
       })
     })
-    .catch(function(err){
+    .catch((err) => {
       alert('ERROR' + err);
       return;
     });

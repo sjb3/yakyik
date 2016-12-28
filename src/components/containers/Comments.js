@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import Comment from '../presentation/Comment';
 import styles from './styles';
 import superagent from 'superagent';
+import axios from 'axios';
 
 class Comments extends Component {
   constructor() {
@@ -18,8 +19,40 @@ class Comments extends Component {
       }
   }
 
-  ComponentDidMount(){
+  componentDidMount(){
       console.log('ComponentDidMount:');
+
+      axios
+      .get('/api/comment')
+      .then((response) => {
+        console.log(response.data);
+
+        let results = response.data.results
+        this.setState({
+          list: results
+        })
+      })
+      .catch((err) => {
+        alert('ERROR' + err);
+        return;
+      });
+
+      // superagent
+      // .get('/api/comment')
+      // .query(null)
+      // .set('Accept', 'application/json')
+      // .end((err, response) => {
+      //   if(err){
+      //     alert('ERROR' + err)
+      //     return
+      //   }
+      //   console.log(JSON.stringify(response.body));
+      //
+      //   let results = response.body.results
+      //   this.setState({
+      //     list: results
+      //   })
+      // })
   }
 
   submitComment(){
