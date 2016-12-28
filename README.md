@@ -26,6 +26,6 @@ localhost:3000
 
 ### Stretch goal
 
-change backend to ES6 completely
+-> change backend to ES6 completely
 
-switch superagent to axios
+-> switch superagent to axios
