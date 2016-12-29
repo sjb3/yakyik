@@ -2,7 +2,7 @@
 
 var express = require('express');
 var router = express.Router();
-var entryController = require('../controllers/entry-controller');
+var zone = require('../controllers/zone-controller');
 var controllers = require('../controllers');
 
 router.get('/:resource', function(req,res,next){

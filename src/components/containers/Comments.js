@@ -5,6 +5,7 @@ import Comment from '../presentation/Comment';
 import styles from './styles';
 import superagent from 'superagent';
 import axios from 'axios';
+import { APIManager } from '../../utils';
 
 class Comments extends Component {
   constructor() {
@@ -21,6 +22,19 @@ class Comments extends Component {
 
   componentDidMount(){
       console.log('ComponentDidMount:');
+
+      // APIManager
+      // .get('/api/comment', null, (err, response) => {
+      //   if(err){
+      //     alert('ERROR' + err.message)
+      //     return
+      //   }
+      //
+      //   console.log('RESULTS: ' + JSON.stringify(response.results))
+      //   this.setState({
+      //     list: response.results
+      //   })
+      // })
 
       axios
       .get('/api/comment')
@@ -103,7 +117,7 @@ class Comments extends Component {
     })
     return (
       <div>
-        <h2>Entry 1 Comments</h2>
+        <h2>COMMENTS</h2>
           <div style = {styles.comment.commentsBox}>
             <ol style={styles.comment.commentsList}>
               { commentList }
