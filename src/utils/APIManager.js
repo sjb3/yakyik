@@ -22,7 +22,7 @@ export default {
         return;
       }
 
-      cb(null, response.body )
+      cb(null, response.body)
     })
 
     // axios
@@ -37,8 +37,21 @@ export default {
     // })
   },
 
-  post: () => {
+  post: (url, body, cb) => {
+    superagent
+    .post(url)
+    .send(body)
+    .set('', 'application/json')
+    .end((err, response) => {
+      if(err) return cb(err, null)
 
+      const confirmation = response.body.confirmation
+      if(confirmation != 'success'){
+        cb({message: response.body.message}, null)
+        return;
+      }
+      cb(null, response.body)
+    })
   },
 
   put: () => {
