@@ -1,7 +1,7 @@
 'use strict';
 
 import superagent from 'superagent';
-import axios from 'axios';
+// import axios from 'axios';
 
 export default {
   get: (url, params, cb) => {
@@ -24,10 +24,12 @@ export default {
 
       cb(null, response.body )
     })
+
     // axios
     // .get(url)
     // .then((response) => {
-    //   response.data
+    //   const confirmation = response.tate.confirmation
+    //   if(confirmation != 'success') return ( response.data.message, response.data)
     // })
     // .catch((err) => {
     //   console.log('error', err);

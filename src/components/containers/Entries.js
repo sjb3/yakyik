@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import Entry from '../presentation/Entry';
 import superagent from 'superagent';
 import axios from 'axios';
+// import { APIManager } from '../../utils';
 
 class Entries extends Component {
   constructor(){
@@ -20,7 +21,7 @@ class Entries extends Component {
   }
 
   componentDidMount(){
-    console.log('ComponentDidMount:');
+    console.log('ComponentDidMount:')
 
     axios
     .get('/api/entry')
@@ -37,22 +38,19 @@ class Entries extends Component {
       return;
     });
 
-    // superagent
-    // .get('/api/entry')
-    // .query(null)
-    // .set('Accept', 'application/json')
-    // .end((err, response) => {
+    // APIManager
+    // .get('/api/entry', null, (err, response) => {
     //   if(err){
-    //     alert('ERROR' + err)
+    //     alert('ERROR' + err.message)
     //     return
     //   }
-    //   console.log(JSON.stringify(response.body));
     //
-    //   let results = response.body.results
+    //   console.log('RESULTS: ' + JSON.stringify(response.results))
     //   this.setState({
-    //     list: results
+    //     list: response.results
     //   })
     // })
+
   }
 
   updateEntry(event){
