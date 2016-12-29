@@ -73,6 +73,11 @@ class Zones extends Component {
     .post('/api/zone')
     .then((updatedZone) => {
       console.log('Add ZONE: '+ data.results);
+      let updatedList = Object.assign([], this.state.list)
+      updatedList.push(data.results)
+      this.setState({
+        list: updatedList
+      })
 
     })
     .catch((err) => {

@@ -25504,6 +25504,8 @@
 	  }, {
 	    key: 'addZone',
 	    value: function addZone() {
+	      var _this3 = this;
+	
 	      console.log('Add ZONE' + JSON.stringify(this.state.zone));
 	
 	      var updatedZone = Object.assign({}, this.state.zone); // originally list
@@ -25511,6 +25513,11 @@
 	
 	      _axios2.default.post('/api/zone').then(function (updatedZone) {
 	        console.log('Add ZONE: ' + data.results);
+	        var updatedList = Object.assign([], _this3.state.list);
+	        updatedList.push(data.results);
+	        _this3.setState({
+	          list: updatedList
+	        });
 	      }).catch(function (err) {
 	        alert('ERROR' + err.message);
 	      });
