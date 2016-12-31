@@ -1,21 +1,20 @@
 'use strict';
 
 import React, { Component } from 'react';
-import Zone from '../presentation/Zone';
+import { CreateZone, Zone } from '../presentation';
 import superagent from 'superagent';
 import axios from 'axios';
-import { APIManager } from '../../utils/APIManager';
+// import { APIManager } from '../../utils/APIManager';
 
 class Zones extends Component {
   constructor(){
     super()
     this.state = {
-      zone: {
-        name: '',
-        zipCode: '',
-        type: ''
-      },
-
+      // zone: {
+      //   name: '',
+      //   zipCode: '',
+      //   type: ''
+      // },
       list: []
     }
   }
@@ -52,26 +51,27 @@ class Zones extends Component {
     // })
 
   }
+// no need to keep
+  // updateZone(event){
+  //   console.log('updateZone: '+event.target.id+ ' == ' +event.target.value);
+  //
+  //   let updatedZone = Object.assign({}, this.state.zone)
+  //   updatedZone[event.target.id] = event.target.value
+  //   this.setState({
+  //     zone: updatedZone
+  //   })
+  // }
 
-  updateZone(event){
-    console.log('updateZone: '+event.target.id+ ' == ' +event.target.value);
+  addZone(zone){
+    console.log('Add ZONE' + JSON.stringify(zone));
 
-    let updatedZone = Object.assign({}, this.state.zone)
-    updatedZone[event.target.id] = event.target.value
-    this.setState({
-      zone: updatedZone
-    })
-  }
+    let updatedZone = Object.assign({}, zone) // originally list
 
-  addZone(){
-    console.log('Add ZONE' + JSON.stringify(this.state.zone));
-
-    let updatedZone = Object.assign({}, this.state.zone) // originally list
-    updatedZone['zipCode'] = updatedZone.zipCode.split(',')
+    // updatedZone['zipCode'] = updatedZone.zipCode.split(',')//necessary>
 
     axios
     .post('/api/zone')
-    .then((updatedZone) => {
+    .then((response) => {
       console.log('Add ZONE: '+ data.results);
       let updatedList = Object.assign([], this.state.list)
       updatedList.push(data.results)
@@ -105,13 +105,10 @@ class Zones extends Component {
         <ul>
           {listItems}
         </ul>
-        <input id="title" onChange={this.updateZone.bind(this)} className="form-control" type="text" placeholder="Title"/><br />
-        <input id="text" onChange={this.updateZone.bind(this)} className="form-control" type="text" placeholder="Text"/><br />
-
-        <button onClick={this.addZone.bind(this)} className="btn btn-danger" type="submit">Add Zone</button>
+        <CreateZone onCreate={this.addZone.bind(this)} />
       </div>
     )
   }
 };
 
-export default Zones
+export default Zones;
