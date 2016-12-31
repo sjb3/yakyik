@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import Comment from '../presentation/Comment';
+import { CreateComment, Comment } from '../presentation';
 import styles from './styles';
 import superagent from 'superagent';
 import axios from 'axios';
@@ -137,9 +137,7 @@ class Comments extends Component {
             <ol style={styles.comment.commentsList}>
               { commentList }
             </ol>
-            <input onChange={this.updateUsername.bind(this)} className="form-control" type="text" placeholder="UserName"/><br />
-            <input onChange={this.updateBody.bind(this)} className="form-control" type="text" placeholder="Comments"/><br />
-            <button onClick={this.submitComment.bind(this)} className="btn btn-info">Submit comment</button>
+            <CreateComment />
           </div>
       </div>
     )
