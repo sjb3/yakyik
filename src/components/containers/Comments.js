@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import Comment from '../presentation/Comment';
+import { CreateComment, Comment } from '../presentation';
 import styles from './styles';
 import superagent from 'superagent';
 import axios from 'axios';
@@ -11,10 +11,10 @@ class Comments extends Component {
   constructor() {
     super()
       this.state = {
-        comments: {
-          username: '',
-          body: ''
-        },
+        // comments: {
+        //   username: '',
+        //   body: ''
+        // },
         list: []
       }
   }
@@ -68,8 +68,10 @@ class Comments extends Component {
       // })
   }
 
-  submitComment(){
-    console.log('submitComment: '+ JSON.stringify(this.state.comment));
+  submitComment(comment){
+    console.log('submitComment: '+ JSON.stringify(comment));
+
+    let updatedComment = Object.assign({}, comment);
 
     axios
     .post('/api/comment')
@@ -87,32 +89,27 @@ class Comments extends Component {
       return;
     });
 
-    // let updatedList = Object.assign([], this.state.list);
-    // updatedList.push(this.state.comment)
-    // this.setState({
-    //   list: updatedList
-    // })
   }
-
-  updateUsername(event){
-    // console.log('updateUsername: '+ event.target.value);
-    // this.state.comment['username'] = event.target.value WRONG WAY
-    let updatedComment = Object.assign({}, this.state.comment)
-    updatedComment['username'] = event.target.value;
-    this.setState({
-      comment: updatedComment
-    })
-  }
-
-  updateBody(event){
-    // console.log('updateBody: '+ event.target.value);
-
-    let updatedComment = Object.assign({}, this.state.comment)
-    updatedComment['body'] = event.target.value;
-    this.setState({
-      comment: updatedComment
-    })
-  }
+//updateUsername and updateBody no longer needed here, as they are being taken care of at CreateComment
+  // updateUsername(event){
+  //   // console.log('updateUsername: '+ event.target.value);
+  //   // this.state.comment['username'] = event.target.value WRONG WAY
+  //   let updatedComment = Object.assign({}, this.state.comment)
+  //   updatedComment['username'] = event.target.value;
+  //   this.setState({
+  //     comment: updatedComment
+  //   })
+  // }
+  //
+  // updateBody(event){
+  //   // console.log('updateBody: '+ event.target.value);
+  //
+  //   let updatedComment = Object.assign({}, this.state.comment)
+  //   updatedComment['body'] = event.target.value;
+  //   this.setState({
+  //     comment: updatedComment
+  //   })
+  // }
 
   // updateTimeStamp(event){
   //   // console.log('updateTimeStamp'+ event.target.value);
@@ -137,9 +134,7 @@ class Comments extends Component {
             <ol style={styles.comment.commentsList}>
               { commentList }
             </ol>
-            <input onChange={this.updateUsername.bind(this)} className="form-control" type="text" placeholder="UserName"/><br />
-            <input onChange={this.updateBody.bind(this)} className="form-control" type="text" placeholder="Comments"/><br />
-            <button onClick={this.submitComment.bind(this)} className="btn btn-info">Submit comment</button>
+            <CreateComment onCreate={this.submitComment.bind(this)} />
           </div>
       </div>
     )

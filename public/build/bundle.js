@@ -21665,9 +21665,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Zone = __webpack_require__(180);
-	
-	var _Zone2 = _interopRequireDefault(_Zone);
+	var _presentation = __webpack_require__(216);
 	
 	var _superagent = __webpack_require__(182);
 	
@@ -21676,8 +21674,6 @@
 	var _axios = __webpack_require__(189);
 	
 	var _axios2 = _interopRequireDefault(_axios);
-	
-	var _APIManager = __webpack_require__(214);
 	
 	function _interopRequireDefault(obj) {
 	  return obj && obj.__esModule ? obj : { default: obj };
@@ -21701,6 +21697,8 @@
 	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 	}
 	
+	// import { APIManager } from '../../utils/APIManager';
+	
 	var Zones = function (_Component) {
 	  _inherits(Zones, _Component);
 	
@@ -21710,12 +21708,11 @@
 	    var _this = _possibleConstructorReturn(this, (Zones.__proto__ || Object.getPrototypeOf(Zones)).call(this));
 	
 	    _this.state = {
-	      zone: {
-	        name: '',
-	        zipCode: '',
-	        type: ''
-	      },
-	
+	      // zone: {
+	      //   name: '',
+	      //   zipCode: '',
+	      //   type: ''
+	      // },
 	      list: []
 	    };
 	    return _this;
@@ -21753,28 +21750,29 @@
 	      //   })
 	      // })
 	    }
-	  }, {
-	    key: 'updateZone',
-	    value: function updateZone(event) {
-	      console.log('updateZone: ' + event.target.id + ' == ' + event.target.value);
+	    // no need to keep
+	    // updateZone(event){
+	    //   console.log('updateZone: '+event.target.id+ ' == ' +event.target.value);
+	    //
+	    //   let updatedZone = Object.assign({}, this.state.zone)
+	    //   updatedZone[event.target.id] = event.target.value
+	    //   this.setState({
+	    //     zone: updatedZone
+	    //   })
+	    // }
 	
-	      var updatedZone = Object.assign({}, this.state.zone);
-	      updatedZone[event.target.id] = event.target.value;
-	      this.setState({
-	        zone: updatedZone
-	      });
-	    }
 	  }, {
 	    key: 'addZone',
-	    value: function addZone() {
+	    value: function addZone(zone) {
 	      var _this3 = this;
 	
-	      console.log('Add ZONE' + JSON.stringify(this.state.zone));
+	      console.log('Add ZONE' + JSON.stringify(zone));
 	
-	      var updatedZone = Object.assign({}, this.state.zone); // originally list
-	      updatedZone['zipCode'] = updatedZone.zipCode.split(',');
+	      var updatedZone = Object.assign({}, zone); // originally list
 	
-	      _axios2.default.post('/api/zone').then(function (updatedZone) {
+	      // updatedZone['zipCode'] = updatedZone.zipCode.split(',')//necessary>
+	
+	      _axios2.default.post('/api/zone').then(function (response) {
 	        console.log('Add ZONE: ' + data.results);
 	        var updatedList = Object.assign([], _this3.state.list);
 	        updatedList.push(data.results);
@@ -21796,10 +21794,10 @@
 	    key: 'render',
 	    value: function render() {
 	      var listItems = this.state.list.map(function (zone, i) {
-	        return _react2.default.createElement('li', { key: i }, _react2.default.createElement(_Zone2.default, { currentzone: zone }));
+	        return _react2.default.createElement('li', { key: i }, _react2.default.createElement(_presentation.Zone, { currentzone: zone }));
 	      });
 	
-	      return _react2.default.createElement('div', null, _react2.default.createElement('ul', null, listItems), _react2.default.createElement('input', { id: 'title', onChange: this.updateZone.bind(this), className: 'form-control', type: 'text', placeholder: 'Title' }), _react2.default.createElement('br', null), _react2.default.createElement('input', { id: 'text', onChange: this.updateZone.bind(this), className: 'form-control', type: 'text', placeholder: 'Text' }), _react2.default.createElement('br', null), _react2.default.createElement('button', { onClick: this.addZone.bind(this), className: 'btn btn-danger', type: 'submit' }, 'Add Zone'));
+	      return _react2.default.createElement('div', null, _react2.default.createElement('ul', null, listItems), _react2.default.createElement(_presentation.CreateZone, { onCreate: this.addZone.bind(this) }));
 	    }
 	  }]);
 	
@@ -25229,75 +25227,7 @@
 	};
 
 /***/ },
-/* 214 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _superagent = __webpack_require__(182);
-	
-	var _superagent2 = _interopRequireDefault(_superagent);
-	
-	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { default: obj };
-	}
-	
-	// import axios from 'axios';
-	
-	exports.default = {
-	  get: function get(url, params, cb) {
-	
-	    _superagent2.default.get('url').query(params).set('Accept', 'application/json').end(function (err, response) {
-	      if (err) {
-	        cb(err, null);
-	        return;
-	      }
-	
-	      var confirmation = response.body.confirmation;
-	      if (confirmation != 'success') {
-	        cb({ message: response.body.message }, null);
-	        return;
-	      }
-	
-	      cb(null, response.body);
-	    });
-	
-	    // axios
-	    // .get(url)
-	    // .then((response) => {
-	    //   const confirmation = response.tate.confirmation
-	    //   if(confirmation != 'success') return ( response.data.message, response.data)
-	    // })
-	    // .catch((err) => {
-	    //   console.log('error', err);
-	    //   return;
-	    // })
-	  },
-	
-	  post: function post(url, body, cb) {
-	    _superagent2.default.post(url).send(body).set('', 'application/json').end(function (err, response) {
-	      if (err) return cb(err, null);
-	
-	      var confirmation = response.body.confirmation;
-	      if (confirmation != 'success') {
-	        cb({ message: response.body.message }, null);
-	        return;
-	      }
-	      cb(null, response.body);
-	    });
-	  },
-	
-	  put: function put() {},
-	
-	  delete: function _delete() {}
-	
-	};
-
-/***/ },
+/* 214 */,
 /* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -25323,11 +25253,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Comment = __webpack_require__(216);
+	var _presentation = __webpack_require__(216);
 	
-	var _Comment2 = _interopRequireDefault(_Comment);
-	
-	var _styles = __webpack_require__(217);
+	var _styles = __webpack_require__(219);
 	
 	var _styles2 = _interopRequireDefault(_styles);
 	
@@ -25372,10 +25300,10 @@
 	    var _this = _possibleConstructorReturn(this, (Comments.__proto__ || Object.getPrototypeOf(Comments)).call(this));
 	
 	    _this.state = {
-	      comments: {
-	        username: '',
-	        body: ''
-	      },
+	      // comments: {
+	      //   username: '',
+	      //   body: ''
+	      // },
 	      list: []
 	    };
 	    return _this;
@@ -25432,10 +25360,12 @@
 	    }
 	  }, {
 	    key: 'submitComment',
-	    value: function submitComment() {
+	    value: function submitComment(comment) {
 	      var _this3 = this;
 	
-	      console.log('submitComment: ' + JSON.stringify(this.state.comment));
+	      console.log('submitComment: ' + JSON.stringify(comment));
+	
+	      var updatedComment = Object.assign({}, comment);
 	
 	      _axios2.default.post('/api/comment').then(function (response) {
 	        console.log(response.data);
@@ -25449,35 +25379,27 @@
 	        alert('ERROR' + err);
 	        return;
 	      });
-	
-	      // let updatedList = Object.assign([], this.state.list);
-	      // updatedList.push(this.state.comment)
-	      // this.setState({
-	      //   list: updatedList
-	      // })
 	    }
-	  }, {
-	    key: 'updateUsername',
-	    value: function updateUsername(event) {
-	      // console.log('updateUsername: '+ event.target.value);
-	      // this.state.comment['username'] = event.target.value WRONG WAY
-	      var updatedComment = Object.assign({}, this.state.comment);
-	      updatedComment['username'] = event.target.value;
-	      this.setState({
-	        comment: updatedComment
-	      });
-	    }
-	  }, {
-	    key: 'updateBody',
-	    value: function updateBody(event) {
-	      // console.log('updateBody: '+ event.target.value);
-	
-	      var updatedComment = Object.assign({}, this.state.comment);
-	      updatedComment['body'] = event.target.value;
-	      this.setState({
-	        comment: updatedComment
-	      });
-	    }
+	    //updateUsername and updateBody no longer needed here, as they are being taken care of at CreateComment
+	    // updateUsername(event){
+	    //   // console.log('updateUsername: '+ event.target.value);
+	    //   // this.state.comment['username'] = event.target.value WRONG WAY
+	    //   let updatedComment = Object.assign({}, this.state.comment)
+	    //   updatedComment['username'] = event.target.value;
+	    //   this.setState({
+	    //     comment: updatedComment
+	    //   })
+	    // }
+	    //
+	    // updateBody(event){
+	    //   // console.log('updateBody: '+ event.target.value);
+	    //
+	    //   let updatedComment = Object.assign({}, this.state.comment)
+	    //   updatedComment['body'] = event.target.value;
+	    //   this.setState({
+	    //     comment: updatedComment
+	    //   })
+	    // }
 	
 	    // updateTimeStamp(event){
 	    //   // console.log('updateTimeStamp'+ event.target.value);
@@ -25493,9 +25415,9 @@
 	    key: 'render',
 	    value: function render() {
 	      var commentList = this.state.list.map(function (comment, i) {
-	        return _react2.default.createElement('li', { key: i }, _react2.default.createElement(_Comment2.default, { currentComment: comment }));
+	        return _react2.default.createElement('li', { key: i }, _react2.default.createElement(_presentation.Comment, { currentComment: comment }));
 	      });
-	      return _react2.default.createElement('div', null, _react2.default.createElement('h2', null, 'COMMENTS'), _react2.default.createElement('div', { style: _styles2.default.comment.commentsBox }, _react2.default.createElement('ol', { style: _styles2.default.comment.commentsList }, commentList), _react2.default.createElement('input', { onChange: this.updateUsername.bind(this), className: 'form-control', type: 'text', placeholder: 'UserName' }), _react2.default.createElement('br', null), _react2.default.createElement('input', { onChange: this.updateBody.bind(this), className: 'form-control', type: 'text', placeholder: 'Comments' }), _react2.default.createElement('br', null), _react2.default.createElement('button', { onClick: this.submitComment.bind(this), className: 'btn btn-info' }, 'Submit comment')));
+	      return _react2.default.createElement('div', null, _react2.default.createElement('h2', null, 'COMMENTS'), _react2.default.createElement('div', { style: _styles2.default.comment.commentsBox }, _react2.default.createElement('ol', { style: _styles2.default.comment.commentsList }, commentList), _react2.default.createElement(_presentation.CreateComment, { onCreate: this.submitComment.bind(this) })));
 	    }
 	  }]);
 	
@@ -25506,6 +25428,136 @@
 
 /***/ },
 /* 216 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.Zone = exports.CreateZone = exports.Comment = exports.CreateComment = undefined;
+	
+	var _CreateComment = __webpack_require__(217);
+	
+	var _CreateComment2 = _interopRequireDefault(_CreateComment);
+	
+	var _CreateZone = __webpack_require__(220);
+	
+	var _CreateZone2 = _interopRequireDefault(_CreateZone);
+	
+	var _Comment = __webpack_require__(218);
+	
+	var _Comment2 = _interopRequireDefault(_Comment);
+	
+	var _Zone = __webpack_require__(180);
+	
+	var _Zone2 = _interopRequireDefault(_Zone);
+	
+	function _interopRequireDefault(obj) {
+	    return obj && obj.__esModule ? obj : { default: obj };
+	}
+	
+	exports.CreateComment = _CreateComment2.default;
+	exports.Comment = _Comment2.default;
+	exports.CreateZone = _CreateZone2.default;
+	exports.Zone = _Zone2.default;
+
+/***/ },
+/* 217 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () {
+	  function defineProperties(target, props) {
+	    for (var i = 0; i < props.length; i++) {
+	      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+	    }
+	  }return function (Constructor, protoProps, staticProps) {
+	    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+	  };
+	}();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { default: obj };
+	}
+	
+	function _classCallCheck(instance, Constructor) {
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError("Cannot call a class as a function");
+	  }
+	}
+	
+	function _possibleConstructorReturn(self, call) {
+	  if (!self) {
+	    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+	  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+	}
+	
+	function _inherits(subClass, superClass) {
+	  if (typeof superClass !== "function" && superClass !== null) {
+	    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+	}
+	
+	var CreateComment = function (_Component) {
+	  _inherits(CreateComment, _Component);
+	
+	  function CreateComment() {
+	    _classCallCheck(this, CreateComment);
+	
+	    var _this = _possibleConstructorReturn(this, (CreateComment.__proto__ || Object.getPrototypeOf(CreateComment)).call(this));
+	
+	    _this.state = {
+	      comment: {
+	        body: '',
+	        username: ''
+	      }
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(CreateComment, [{
+	    key: 'updateComment',
+	    value: function updateComment(event) {
+	      // console.log('updateComment: ' + event.target.id + '==' + event.target.value);
+	
+	      var updatedComment = Object.assign({}, this.state.comment);
+	      updatedComment[event.target.id] = event.target.value;
+	      this.setState({
+	        comment: updatedComment
+	      });
+	    }
+	  }, {
+	    key: 'submitComment',
+	    value: function submitComment(event) {
+	      console.log('submitComment: ' + JSON.stringify(this.state.comment));
+	      this.props.onCreate(this.state.comment);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement('div', null, _react2.default.createElement('h3', null, 'Create Comment'), _react2.default.createElement('input', { onChange: this.updateComment.bind(this), id: 'username', className: 'form-control', type: 'text', placeholder: 'Username' }), _react2.default.createElement('br', null), _react2.default.createElement('input', { onChange: this.updateComment.bind(this), id: 'body', className: 'form-control', type: 'text', placeholder: 'Comment' }), _react2.default.createElement('br', null), _react2.default.createElement('button', { onClick: this.submitComment.bind(this), className: 'btn btn-info' }, 'Submit comment'));
+	    }
+	  }]);
+	
+	  return CreateComment;
+	}(_react.Component);
+	
+	exports.default = CreateComment;
+
+/***/ },
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25574,7 +25626,7 @@
 	exports.default = Comment;
 
 /***/ },
-/* 217 */
+/* 219 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -25611,6 +25663,103 @@
 	    }
 	  }
 	};
+
+/***/ },
+/* 220 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () {
+	  function defineProperties(target, props) {
+	    for (var i = 0; i < props.length; i++) {
+	      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+	    }
+	  }return function (Constructor, protoProps, staticProps) {
+	    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+	  };
+	}();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { default: obj };
+	}
+	
+	function _classCallCheck(instance, Constructor) {
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError("Cannot call a class as a function");
+	  }
+	}
+	
+	function _possibleConstructorReturn(self, call) {
+	  if (!self) {
+	    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+	  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+	}
+	
+	function _inherits(subClass, superClass) {
+	  if (typeof superClass !== "function" && superClass !== null) {
+	    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+	}
+	
+	var CreateZone = function (_Component) {
+	  _inherits(CreateZone, _Component);
+	
+	  function CreateZone() {
+	    _classCallCheck(this, CreateZone);
+	
+	    var _this = _possibleConstructorReturn(this, (CreateZone.__proto__ || Object.getPrototypeOf(CreateZone)).call(this));
+	
+	    _this.state = {
+	      zone: {
+	        name: '',
+	        zipCode: '',
+	        type: ''
+	      }
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(CreateZone, [{
+	    key: 'updateZone',
+	    value: function updateZone(event) {
+	      console.log('updateZone: ' + event.target.id + '==' + event.target.value);
+	
+	      var updated = Object.assign({}, this.state.zone);
+	      updated[event.target.id] = event.target.value;
+	      this.setState({
+	        zone: updated
+	      });
+	    }
+	  }, {
+	    key: 'submitZone',
+	    value: function submitZone(event) {
+	      console.log('submitZone: ' + JSON.stringify(this.state.zone));
+	      var updated = Object.assign({}, this.state.zone);
+	      updated['zipCode'] = updated.zipCode.split(',');
+	      this.props.onCreate(updated);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement('div', null, _react2.default.createElement('h3', null, 'Create Zone'), _react2.default.createElement('input', { onChange: this.updateZone.bind(this), id: 'name', className: 'form-control', type: 'text', placeholder: 'Name' }), _react2.default.createElement('br', null), _react2.default.createElement('input', { onChange: this.updateZone.bind(this), id: 'zipcode', className: 'form-control', type: 'text', placeholder: 'Zipcode' }), _react2.default.createElement('br', null), _react2.default.createElement('button', { onClick: this.submitZone.bind(this), className: 'btn btn-info' }, 'Submit zone'));
+	    }
+	  }]);
+	
+	  return CreateZone;
+	}(_react.Component);
+	
+	exports.default = CreateZone;
 
 /***/ }
 /******/ ]);
