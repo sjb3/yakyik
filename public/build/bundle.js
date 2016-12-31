@@ -25339,8 +25339,6 @@
 	
 	var _axios2 = _interopRequireDefault(_axios);
 	
-	var _utils = __webpack_require__(218);
-	
 	function _interopRequireDefault(obj) {
 	  return obj && obj.__esModule ? obj : { default: obj };
 	}
@@ -25363,6 +25361,8 @@
 	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 	}
 	
+	// import { APIManager } from '../../utils';
+	
 	var Comments = function (_Component) {
 	  _inherits(Comments, _Component);
 	
@@ -25374,8 +25374,7 @@
 	    _this.state = {
 	      comments: {
 	        username: '',
-	        body: '',
-	        timestamp: ''
+	        body: ''
 	      },
 	      list: []
 	    };
@@ -25434,13 +25433,28 @@
 	  }, {
 	    key: 'submitComment',
 	    value: function submitComment() {
+	      var _this3 = this;
+	
 	      console.log('submitComment: ' + JSON.stringify(this.state.comment));
 	
-	      var updatedList = Object.assign([], this.state.list);
-	      updatedList.push(this.state.comment);
-	      this.setState({
-	        list: updatedList
+	      _axios2.default.post('/api/comment').then(function (response) {
+	        console.log(response.data);
+	
+	        var updatedList = Object.assign([], _this3.state.list);
+	        updatedList.push(response.data);
+	        _this3.setState({
+	          list: updatedList
+	        });
+	      }).catch(function (err) {
+	        alert('ERROR' + err);
+	        return;
 	      });
+	
+	      // let updatedList = Object.assign([], this.state.list);
+	      // updatedList.push(this.state.comment)
+	      // this.setState({
+	      //   list: updatedList
+	      // })
 	    }
 	  }, {
 	    key: 'updateUsername',
@@ -25464,24 +25478,24 @@
 	        comment: updatedComment
 	      });
 	    }
-	  }, {
-	    key: 'updateTimeStamp',
-	    value: function updateTimeStamp(event) {
-	      // console.log('updateTimeStamp'+ event.target.value);
 	
-	      var updatedComment = Object.assign({}, this.state.comment);
-	      updatedComment['timestamp'] = event.target.value;
-	      this.setState({
-	        comment: updatedComment
-	      });
-	    }
+	    // updateTimeStamp(event){
+	    //   // console.log('updateTimeStamp'+ event.target.value);
+	    //
+	    //   let updatedComment = Object.assign({}, this.state.comment)
+	    //   updatedComment['timestamp'] = event.target.value;
+	    //   this.setState({
+	    //     comment: updatedComment
+	    //   })
+	    // }
+	
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var commentList = this.state.list.map(function (comment, i) {
 	        return _react2.default.createElement('li', { key: i }, _react2.default.createElement(_Comment2.default, { currentComment: comment }));
 	      });
-	      return _react2.default.createElement('div', null, _react2.default.createElement('h2', null, 'COMMENTS'), _react2.default.createElement('div', { style: _styles2.default.comment.commentsBox }, _react2.default.createElement('ol', { style: _styles2.default.comment.commentsList }, commentList), _react2.default.createElement('input', { onChange: this.updateUsername.bind(this), className: 'form-control', type: 'text', placeholder: 'UserName' }), _react2.default.createElement('br', null), _react2.default.createElement('input', { onChange: this.updateBody.bind(this), className: 'form-control', type: 'text', placeholder: 'Comments' }), _react2.default.createElement('br', null), _react2.default.createElement('input', { onChange: this.updateTimeStamp.bind(this), className: 'form-control', type: 'text', placeholder: 'TimeStamp' }), _react2.default.createElement('br', null), _react2.default.createElement('button', { onClick: this.submitComment.bind(this), className: 'btn btn-info' }, 'Submit comment')));
+	      return _react2.default.createElement('div', null, _react2.default.createElement('h2', null, 'COMMENTS'), _react2.default.createElement('div', { style: _styles2.default.comment.commentsBox }, _react2.default.createElement('ol', { style: _styles2.default.comment.commentsList }, commentList), _react2.default.createElement('input', { onChange: this.updateUsername.bind(this), className: 'form-control', type: 'text', placeholder: 'UserName' }), _react2.default.createElement('br', null), _react2.default.createElement('input', { onChange: this.updateBody.bind(this), className: 'form-control', type: 'text', placeholder: 'Comments' }), _react2.default.createElement('br', null), _react2.default.createElement('button', { onClick: this.submitComment.bind(this), className: 'btn btn-info' }, 'Submit comment')));
 	    }
 	  }]);
 	
@@ -25596,28 +25610,6 @@
 	      listStyleType: 'none'
 	    }
 	  }
-	};
-
-/***/ },
-/* 218 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _APIManager = __webpack_require__(214);
-	
-	var _APIManager2 = _interopRequireDefault(_APIManager);
-	
-	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { default: obj };
-	}
-	
-	exports.default = {
-	  APIManager: _APIManager2.default
 	};
 
 /***/ }
